@@ -1,7 +1,13 @@
+2004-10-23 11:42  dave
+
+	* lib/Number/Fraction.pm (1.7): Improved test coverage (to 100% -
+	  Go Me!)
+
 2004-05-23 13:18  dave
 
 	* Makefile.PL (1.3), lib/Number/Fraction.pm (1.6), t/10_pod.t
-	(1.2): Changed pod tests.  Updated my email address in Makefile.PL
+	  (1.2): Changed pod tests.  Updated my email address in
+	  Makefile.PL
 
 2004-05-23 11:01  dave
 
@@ -13,14 +19,14 @@
 2004-05-22 22:15  dave
 
 	* lib/Number/Fraction.pm (1.5), t/02_create.t (1.2), t/03_create.t
-	(1.2), t/04_add.t (1.2), t/05_subtract.t (1.2), t/06_multiply.t
-	(1.2), t/07_divide.t (1.2), t/10_pod.t (1.1): Added more tests. 
-	Fixed a couple of bugs that they uncovered.
+	  (1.2), t/04_add.t (1.2), t/05_subtract.t (1.2), t/06_multiply.t
+	  (1.2), t/07_divide.t (1.2), t/10_pod.t (1.1): Added more tests.
+	  Fixed a couple of bugs that they uncovered.
 
 2004-04-28 09:37  dave
 
 	* MANIFEST (1.2), lib/Number/Fraction.pm (1.4): Added negative
-	tests to MANIFEST
+	  tests to MANIFEST
 
 2004-04-27 14:12  dave
 
@@ -30,21 +36,18 @@
 2003-02-19 20:02  dave
 
 	* t/08_compare.t (1.2): Corrected invalid string tests.  '1/2' lt
-	'1/4' (when considered as strings)
+	  '1/4' (when considered as strings)
 	* lib/Number/Fraction.pm (1.2): Correct '+0' to '0+'.  Added
-	"fallback" - which allowed me to remove cmp and ncmp.
-
-2003-02-19 19:40  dave
-
-	* Changes (1.1.1.1), MANIFEST (1.1.1.1), Makefile.PL (1.1.1.1),
-	README (1.1.1.1), lib/Number/Fraction.pm (1.1.1.1), t/01_load.t
-	(1.1.1.1), t/02_create.t (1.1.1.1), t/03_create.t (1.1.1.1),
-	t/04_add.t (1.1.1.1), t/05_subtract.t (1.1.1.1), t/06_multiply.t
-	(1.1.1.1), t/07_divide.t (1.1.1.1), t/08_compare.t (1.1.1.1):
-	imported
+	  "fallback" - which allowed me to remove cmp and ncmp.
 	* Changes (1.1), MANIFEST (1.1), Makefile.PL (1.1), README (1.1),
-	lib/Number/Fraction.pm (1.1), t/01_load.t (1.1), t/02_create.t
-	(1.1), t/03_create.t (1.1), t/04_add.t (1.1), t/05_subtract.t
-	(1.1), t/06_multiply.t (1.1), t/07_divide.t (1.1), t/08_compare.t
-	(1.1): Initial revision
+	  lib/Number/Fraction.pm (1.1), t/01_load.t (1.1), t/02_create.t
+	  (1.1), t/03_create.t (1.1), t/04_add.t (1.1), t/05_subtract.t
+	  (1.1), t/06_multiply.t (1.1), t/07_divide.t (1.1), t/08_compare.t
+	  (1.1): Initial revision
+	* Changes (1.1.1.1), MANIFEST (1.1.1.1), Makefile.PL (1.1.1.1),
+	  README (1.1.1.1), lib/Number/Fraction.pm (1.1.1.1), t/01_load.t
+	  (1.1.1.1), t/02_create.t (1.1.1.1), t/03_create.t (1.1.1.1),
+	  t/04_add.t (1.1.1.1), t/05_subtract.t (1.1.1.1), t/06_multiply.t
+	  (1.1.1.1), t/07_divide.t (1.1.1.1), t/08_compare.t (1.1.1.1):
+	  imported
 
