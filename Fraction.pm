@@ -11,9 +11,12 @@
 #   This script is free software; you can redistribute it and/or
 #   modify it under the same terms as Perl itself.
 #
-# $Id: Fraction.pm,v 1.3 2004/04/27 13:12:48 dave Exp $
+# $Id: Fraction.pm,v 1.4 2004/04/28 08:37:39 dave Exp $
 #
 # $Log: Fraction.pm,v $
+# Revision 1.4  2004/04/28 08:37:39  dave
+# Added negative tests to MANIFEST
+#
 # Revision 1.3  2004/04/27 13:12:48  dave
 # Added support for negative numbers.
 #
@@ -31,7 +34,7 @@ use warnings;
 
 use Carp;
 
-our $VERSION = sprintf "%d.%02d", '$Revision: 1.3 $ ' =~ /(\d+)\.(\d+)/;
+our $VERSION = sprintf "%d.%02d", '$Revision: 1.4 $ ' =~ /(\d+)\.(\d+)/;
 
 use overload
   q("") => 'to_string',
@@ -211,7 +214,6 @@ sub _hcf {
 
 1;
 __END__
-# Below is stub documentation for your module. You'd better edit it!
 
 =head1 NAME
 
