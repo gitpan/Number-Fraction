@@ -11,9 +11,12 @@
 #   This script is free software; you can redistribute it and/or
 #   modify it under the same terms as Perl itself.
 #
-# $Id: Fraction.pm,v 1.2 2003/02/19 20:01:25 dave Exp $
+# $Id: Fraction.pm,v 1.3 2004/04/27 13:12:48 dave Exp $
 #
 # $Log: Fraction.pm,v $
+# Revision 1.3  2004/04/27 13:12:48  dave
+# Added support for negative numbers.
+#
 # Revision 1.2  2003/02/19 20:01:25  dave
 # Correct '+0' to '0+'.
 # Added "fallback" - which allowed me to remove cmp and ncmp.
@@ -28,7 +31,7 @@ use warnings;
 
 use Carp;
 
-our $VERSION = sprintf "%d.%02d", '$Revision: 1.2 $ ' =~ /(\d+)\.(\d+)/;
+our $VERSION = sprintf "%d.%02d", '$Revision: 1.3 $ ' =~ /(\d+)\.(\d+)/;
 
 use overload
   q("") => 'to_string',
@@ -55,7 +58,7 @@ sub new {
 
   my $self;
   if (@_ >= 2) {
-    return if $_[0] =~ /\D/ or $_[1] =~ /\D/;
+    return unless $_[0] =~ /^-?\d+$/ or $_[1] =~ /^-?\d+$/;
 
     $self->{num} = $_[0];
     $self->{den} = $_[1];
@@ -69,7 +72,7 @@ sub new {
           ref $_[0];
 	}
     } else {
-      return unless $_[0] =~ m|^(\d+)/(\d+)|;
+      return unless $_[0] =~ m|^(-?\d+)/(-?\d+)|;
 
       $self->{num} = $1;
       $self->{den} = $2;
@@ -93,6 +96,12 @@ sub normalise {
 
   for (qw/num den/) {
     $self->{$_} /= $hcf;
+  }
+
+  if ($self->{den} < 0) {
+    for (qw/num den/) {
+      $self->{$_} *= -1;
+    }
   }
 }
 
