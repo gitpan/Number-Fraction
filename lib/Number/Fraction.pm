@@ -1,4 +1,4 @@
-# $Id: Fraction.pm,v 1.9 2006/03/02 13:00:05 dave Exp $
+# $Id: Fraction.pm 31 2008-03-08 13:21:31Z dave $
 
 =head1 NAME
 
@@ -94,7 +94,7 @@ use warnings;
 
 use Carp;
 
-our $VERSION = sprintf "%d.%02d", '$Revision: 1.9 $ ' =~ /(\d+)\.(\d+)/;
+our $VERSION = sprintf "%d", '$Revision: 31 $ ' =~ /(\d+)/;
 
 use overload
   q("") => 'to_string',
@@ -395,43 +395,13 @@ perldoc overload
 
 =head1 AUTHOR
 
-Dave Cross, E<lt>dave@dave.org.ukE<gt>
+Dave Cross, E<lt>dave@mag-sol.comE<gt>
 
 =head1 COPYRIGHT AND LICENSE
 
-Copyright 2002 by Dave Cross
+Copyright 2002-8 by Dave Cross
 
 This library is free software; you can redistribute it and/or modify
 it under the same terms as Perl itself.
 
 =cut
- 
-#
-# $Log: Fraction.pm,v $
-# Revision 1.9  2006/03/02 13:00:05  dave
-# A couple of patches supplied by David Westbrook.
-#
-# Revision 1.8  2005/10/22 21:19:07  dave
-# Added new tests.
-#
-# Revision 1.7  2004/10/23 10:42:56  dave
-# Improved test coverage (to 100% - Go Me!)
-#
-# Revision 1.6  2004/05/23 12:18:13  dave
-# Changed pod tests.
-# Updated my email address in Makefile.PL
-#
-# Revision 1.5  2004/05/22 21:15:10  dave
-# Added more tests.
-# Fixed a couple of bugs that they uncovered.
-#
-# Revision 1.4  2004/04/28 08:37:39  dave
-# Added negative tests to MANIFEST
-#
-# Revision 1.3  2004/04/27 13:12:48  dave
-# Added support for negative numbers.
-#
-# Revision 1.2  2003/02/19 20:01:25  dave
-# Correct '+0' to '0+'.
-# Added "fallback" - which allowed me to remove cmp and ncmp.
-#
