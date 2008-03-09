@@ -1,6 +1,6 @@
 ---
 name: Number-Fraction
-version: 1.10
+version: 1.11
 author:
   - 'Dave Cross, E<lt>dave@mag-sol.comE<gt>'
 abstract: Perl extension to model fractions
@@ -8,6 +8,8 @@ license: perl
 resources:
   license: http://dev.perl.org/licenses/
 requires:
+  Carp: 0
+  overload: 0
   perl: 5.6.0
 build_requires:
   Test::More: 0

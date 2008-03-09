@@ -1,5 +1,17 @@
+2008-03-09  dave
+
+	* [r33] Build.PL:
+	  Fiddled with dependencies.
+	  Incremented version number.
+
 2008-03-08  dave
 
+	* [r32] MANIFEST:
+	  Added Build.PL and META.yml
+	* [r31] lib/Number/Fraction.pm:
+	  Changed email address and copyright date
+	* [r30] Build.PL, Makefile.PL:
+	  Moved from Makefile.PL to Build.PL.
 	* [r29] lib/Number/Fraction.pm:
 	  Use svn revision number.
 	  Remove old cvs logs.
