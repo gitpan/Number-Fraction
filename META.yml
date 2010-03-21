@@ -1,23 +1,25 @@
 ---
-name: Number-Fraction
-version: 1.12
+abstract: 'Perl extension to model fractions'
 author:
   - 'Dave Cross, E<lt>dave@mag-sol.comE<gt>'
-abstract: Perl extension to model fractions
-license: perl
-resources:
-  license: http://dev.perl.org/licenses/
-requires:
-  Carp: 0
-  overload: 0
-  perl: 5.6.0
 build_requires:
   Test::More: 0
+configure_requires:
+  Module::Build: 0.36
+generated_by: 'Module::Build version 0.3603'
+license: perl
+meta-spec:
+  url: http://module-build.sourceforge.net/META-spec-v1.4.html
+  version: 1.4
+name: Number-Fraction
 provides:
   Number::Fraction:
     file: lib/Number/Fraction.pm
-    version: 1.12
-generated_by: Module::Build version 0.32
-meta-spec:
-  url: http://module-build.sourceforge.net/META-spec-v1.2.html
-  version: 1.2
+    version: 1.13
+requires:
+  Carp: 0
+  overload: 0
+  perl: v5.6.0
+resources:
+  license: http://dev.perl.org/licenses/
+version: 1.13
