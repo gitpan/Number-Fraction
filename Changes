@@ -1,3 +1,18 @@
+2011-11-26  Dave Cross <dave@dave.org.uk>
+
+  * lib/Number/Fraction.pm: Fix typo in docs.
+
+  * lib/Number/Fraction.pm: Bump version number.
+
+  * MANIFEST, t/14_abs.t: Added more tests for 'abs'. Added META.json to
+  MANIFEST.
+
+2011-11-24  Dave Cross <dave@dave.org.uk>
+
+  * lib/Number/Fraction.pm: Implemented the 'abs' function. Tests now pass.
+
+  * t/14_abs.t: Added test for the 'abs' function.
+
 2010-03-21  Dave Cross <dave@angel.mag-sol.com>
 
   * lib/Number/Fraction.pm: Added documentation for the exponentiation support.

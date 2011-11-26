@@ -93,7 +93,7 @@ Number::Fraction object - if that makes sense. In all other cases, the
 expression returns a real number.
 
 Currently this only works if the right hand operand is an integer (or
-a Number::Fraction object that has a numerator of 1). Later I hope to
+a Number::Fraction object that has a denominator of 1). Later I hope to
 extend this so support so that a Number::Fraction object is returned
 whenever the result of the expression is a rational number.
 
@@ -116,7 +116,7 @@ use warnings;
 
 use Carp;
 
-our $VERSION = '1.13';
+our $VERSION = '1.14';
 
 use overload
   q("") => 'to_string',
@@ -126,6 +126,7 @@ use overload
   '-' => 'subtract',
   '/' => 'div',
   '**' => 'exp',
+  'abs' => 'abs',
   fallback => 1;
 
 my %_const_handlers =
@@ -421,6 +422,19 @@ sub exp {
   } else {
     croak "Can't raise $l to the power $r\n";
   }
+}
+
+=head2 abs
+
+Returns a copy of the given object with both the numerator and
+denominator changed to positive values.
+
+=cut
+
+sub abs {
+  my $self = shift;
+
+  return (ref $self)->new(abs($self->{num}), abs($self->{den}));
 }
 
 sub _hcf {
