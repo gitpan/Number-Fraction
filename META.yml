@@ -5,9 +5,9 @@ author:
 build_requires:
   Test::More: 0
 configure_requires:
-  Module::Build: 0.38
+  Module::Build: 0.40
 dynamic_config: 1
-generated_by: 'Module::Build version 0.38, CPAN::Meta::Converter version 2.112150'
+generated_by: 'Module::Build version 0.4005, CPAN::Meta::Converter version 2.130880'
 license: perl
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.4.html
@@ -16,11 +16,12 @@ name: Number-Fraction
 provides:
   Number::Fraction:
     file: lib/Number/Fraction.pm
-    version: 1.14
+    version: 2.00
 requires:
   Carp: 0
+  Moose: 0
   overload: 0
   perl: v5.6.0
 resources:
   license: http://dev.perl.org/licenses/
-version: 1.14
+version: 2.00

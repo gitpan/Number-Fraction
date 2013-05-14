@@ -104,6 +104,15 @@ For example:
   '2/1' ** '1/2' Returns a real number (1.414213)
    0.5  ** '2/1' Returns a real number (0.25)
 
+=head2 Version 2: Now With Added Moose
+
+Version 2 of Number::Fraction has been reimplemented using Moose. You should
+see very little difference in the way that the class works. The only difference
+I can see is that C<new> used to return C<undef> if it couldn't create a valid
+object from its arguments, it now dies. If you aren't sure of the values that
+are being passed into the constructor, then you'll want to call it within an
+C<eval { ... }> block (or using something equivalent like L<Try::Tiny>).
+
 =head1 METHODS
 
 =cut
@@ -115,22 +124,28 @@ use strict;
 use warnings;
 
 use Carp;
+use Moose;
 
-our $VERSION = '1.14';
+our $VERSION = '2.00';
 
 use overload
-  q("") => 'to_string',
-  '0+' => 'to_num',
-  '+' => 'add',
-  '*' => 'mult',
-  '-' => 'subtract',
-  '/' => 'div',
-  '**' => 'exp',
-  'abs' => 'abs',
+  q("")    => 'to_string',
+  '0+'     => 'to_num',
+  '+'      => 'add',
+  '*'      => 'mult',
+  '-'      => 'subtract',
+  '/'      => 'div',
+  '**'     => 'exp',
+  'abs'    => 'abs',
   fallback => 1;
 
-my %_const_handlers =
-  (q => sub { return __PACKAGE__->new($_[0]) || $_[1] });
+my %_const_handlers = (
+  q => sub {
+    my $f = eval { __PACKAGE__->new($_[0]) };
+    return $_[1] if $@;
+    return $f;
+  }
+);
 
 =head2 import
 
@@ -154,9 +169,19 @@ sub unimport {
   overload::remove_constant(q => undef);
 }
 
-=head2 new
+has num => (
+  is  => 'rw',
+  isa => 'Int',
+);
 
-Constructor for Number::Fraction object. Takes the following kinds of
+has den => (
+  is  => 'rw',
+  isa => 'Int',
+);
+
+=head2 BUILDARGS
+
+Parameter massager for Number::Fraction object. Takes the following kinds of
 parameters:
 
 =over 4
@@ -187,44 +212,45 @@ are used.
 
 =back
 
-Returns C<undef> if a Number::Fraction object can't be created.
+Dies if a Number::Fraction object can't be created.
 
 =cut 
 
-sub new {
+around BUILDARGS => sub {
+  my $orig = shift;
   my $class = shift;
 
-  my $self;
   if (@_ >= 2) {
-    return unless $_[0] =~ /^-?[0-9]+\z/ and $_[1] =~ /^-?[0-9]+\z/;
+    die unless $_[0] =~ /^-?[0-9]+\z/ and $_[1] =~ /^-?[0-9]+\z/;
 
-    $self->{num} = $_[0];
-    $self->{den} = $_[1];
+    return $class->$orig({ num => $_[0], den => $_[1] });
   } elsif (@_ == 1) {
     if (ref $_[0]) {
       if (UNIVERSAL::isa($_[0], $class)) {
-        return $class->new($_[0]->{num},
-                           $_[0]->{den});
+        return $class->$orig({ num => $_[0]->{num}, den => $_[0]->{den} });
       } else {
-        croak "Can't make a $class from a ", 
-          ref $_[0];
-	}
+        die "Can't make a $class from a ", ref $_[0];
+      }
     } else {
-      return unless $_[0] =~ m|^(-?[0-9]+)(?:/(-?[0-9]+))?\z|;
+      die unless $_[0] =~ m|^(-?[0-9]+)(?:/(-?[0-9]+))?\z|;
 
-      $self->{num} = $1;
-      $self->{den} = defined $2 ? $2 : 1;
+      return $class->$orig({ num => $1, den => ( defined $2 ? $2 : 1) });
     }
   } else {
-    $self->{num} = 0;
-    $self->{den} = 1;
+    return $class->$orig({ num => 0, den => 1 });
   }
+};
 
-  bless $self, $class;
+=head2 BUILD
 
+Object initialiser for Number::Fraction. Ensures that fractions are in a
+normalised format.
+
+=cut
+
+sub BUILD {
+  my $self = shift;
   $self->_normalise;
-
-  return $self;
 }
 
 sub _normalise {
@@ -290,7 +316,7 @@ sub add {
   if (ref $r) {
     if (UNIVERSAL::isa($r, ref $l)) {
       return (ref $l)->new($l->{num} * $r->{den} + $r->{num} * $l->{den},
-			   $r->{den} * $l->{den});
+                           $r->{den} * $l->{den});
     } else {
       croak "Can't add a ", ref $l, " to a ", ref $l;
     }
@@ -319,7 +345,7 @@ sub mult {
   if (ref $r) {
     if (UNIVERSAL::isa($r, ref $l)) {
       return (ref $l)->new($l->{num} * $r->{num},
-			   $l->{den} * $r->{den});
+                           $l->{den} * $r->{den});
     } else {
       croak "Can't multiply a ", ref $l, " by a ", ref $l;
     }
@@ -348,7 +374,7 @@ sub subtract {
   if (ref $r) {
     if (UNIVERSAL::isa($r, ref $l)) {
       return (ref $l)->new($l->{num} * $r->{den} - $r->{num} * $l->{den},
-			   $r->{den} * $l->{den});
+                           $r->{den} * $l->{den});
     } else {
       croak "Can't subtract a ", ref $l, " from a ", ref $l;
     }
@@ -378,7 +404,7 @@ sub div {
   if (ref $r) {
     if (UNIVERSAL::isa($r, ref $l)) {
       return (ref $l)->new($l->{num} * $r->{den},
-			   $l->{den} * $r->{num});
+                           $l->{den} * $r->{num});
     } else {
       croak "Can't divide a ", ref $l, " by a ", ref $l;
     }

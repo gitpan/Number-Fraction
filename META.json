@@ -4,7 +4,7 @@
       "Dave Cross, E<lt>dave@mag-sol.comE<gt>"
    ],
    "dynamic_config" : 1,
-   "generated_by" : "Module::Build version 0.38, CPAN::Meta::Converter version 2.112150",
+   "generated_by" : "Module::Build version 0.4005, CPAN::Meta::Converter version 2.130880",
    "license" : [
       "perl_5"
    ],
@@ -16,18 +16,19 @@
    "prereqs" : {
       "build" : {
          "requires" : {
-            "Test::More" : 0
+            "Test::More" : "0"
          }
       },
       "configure" : {
          "requires" : {
-            "Module::Build" : "0.38"
+            "Module::Build" : "0.40"
          }
       },
       "runtime" : {
          "requires" : {
-            "Carp" : 0,
-            "overload" : 0,
+            "Carp" : "0",
+            "Moose" : "0",
+            "overload" : "0",
             "perl" : "v5.6.0"
          }
       }
@@ -35,7 +36,7 @@
    "provides" : {
       "Number::Fraction" : {
          "file" : "lib/Number/Fraction.pm",
-         "version" : "1.14"
+         "version" : "2.00"
       }
    },
    "release_status" : "stable",
@@ -44,5 +45,5 @@
          "http://dev.perl.org/licenses/"
       ]
    },
-   "version" : "1.14"
+   "version" : "2.00"
 }
